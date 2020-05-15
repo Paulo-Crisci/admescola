@@ -1,30 +1,16 @@
-
-
 <?php
-require_once "conexao.php";
 
-            $ALUNO = $_POST['nome'];
-            $DISCIPLINA = $_POST['disciplina'];
-            $AV1 = $_POST['av1'];
-            $AV2 = $_POST['av2'];
-            $AV3 = $_POST['av3'];
-            
-            $sql = "INSERT INTO tbnotas (nome, disciplina, av1, av2, av3)  VALUES ('$ALUNO', '$DISCIPLINA', '$AV1', '$AV2', '$AV3')";
-            
-            if (mysqli_query($conn, $sql)){
-            echo "Nota lançada com sucesso!";
-            }else{
-                echo "erro: " . $sql . "<br>" . mysqli_error($conn);
-            }
-             mysqli_close($conn);
-        
-		?>
-        
+include_once 'conexao.php';
+
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <title>Insere dados</title>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         .wrapper{
@@ -41,16 +27,15 @@ require_once "conexao.php";
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h2>Lançar Notas</h2>
+                        <h2>Cadastrar Aluno</h2>
                     </div>
-                    <p>Preencha os campos abaixo para inserir as notas das provas realizadas pelo aluno</p>
-                    <form action="lancanota.php" method="post">
-                    
-                    <div class="form-group ">
-                            <label>Escolha o Aluno</label>
-                            <select name="aluno"> <br><br>
-                            <option value="nome">Escolha o Aluno</option>
-                            
+                    <p>Preencha os campos abaixo para fazer o cadastro do aluno</p>
+                    <form action="salvanota.php" method="post">
+
+                    <div class="form-groupp ">
+                            <label><p>Escolha o Aluno</p></label>
+                            <select name="nome"> <br><br>
+                            <option value="">Escolha o Aluno</option>
                             <?php
                             
                             $sql = "SELECT * FROM tbaluno WHERE 1";
@@ -82,14 +67,15 @@ require_once "conexao.php";
                             ?>
                             
                             </select>
-
-                    <div class="form-group ">
-                            <label>Escolha a Disciplina</label>
+                            
+                        </div>
+                        <div class="form-groupp ">
+                            <label><p>Escolha a Disciplina</p></label>
                             <select name="disciplina"> <br><br>
-                            <option value="Disciplina">Escolha a Disciplina</option>
+                            <option value="">Escolha a Disciplina</option>
                             <?php
                             
-                            $sql = "SELECT * FROM tbalunos WHERE 0";
+                            $sql = "SELECT * FROM tbmateria WHERE 1";
     
                             if($stmt = mysqli_prepare($conn, $sql)){                               
                                 // Tentativa de executar a declaração preparada
@@ -101,7 +87,7 @@ require_once "conexao.php";
                                         /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
                                         contém apenas uma linha, não precisamos usar o loop while */
                                         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo "<option value='{$row['ID']}'>{$row['nome']}</option>";
+                                            echo "<option value='{$row['ID']}'>{$row['disciplina']}</option>";
                                         }
                                         
                                     } else{
@@ -118,25 +104,33 @@ require_once "conexao.php";
                             ?>
                             
                             </select>
-                        
-                        
+                            
+                        </div>
+                       
+
                         <div class="form-group">
-                            <label>Atividade 1</label>
+                            <label>Avaliação 1</label>
                             <input type="text" name="av1" class="form-control">
                             
                         </div>
                         <div class="form-group">
-                            <label>Atividade 2</label>
-                            <input type="text" name="av2" class="form-control">
-                            
+                            <label>Avaliação 2</label>
+                           
+                            <input type="av2" name="av2" class="form-control" ></input>  
                         </div>
+                        
+                    
+                        
+                       
                         <div class="form-group">
-                            <label>Atividade 3</label>
-                            <input type="text" name="av3" class="form-control">
+                            <label>Avaliação 3</label>
+                            <input type="text" name="av3" class="form-control" ></input> 
                             
                         </div>
                         
-                        <input type="submit" class="btn btn-primary" value="Salvar Notas">
+                        
+                        <input type="submit" name="submit" class="btn btn-primary" value="Enviar">
+                        
                         <a href="index.php" class="btn btn-default">Voltar</a>
                     </form>
                 </div>

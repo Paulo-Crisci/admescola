@@ -43,7 +43,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Checa os erros de entrada antes de inserir no banco
     if(empty($nome_erro) && empty($endereco_erro) && empty($salario_erro)){
         // Prepara a declaração de UPDATE
-        $sql = "UPDATE empregados SET nome=?, endereco=?, salario=? WHERE id=?";
+        $sql = "UPDATE tbalunos SET av1=?, av2=?, av3=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Vincular variáveis ​​à instrução preparada como parâmetros
@@ -78,8 +78,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $id =  trim($_GET["id"]);
         
         // Prepara a declaração de select
-        $sql = "SELECT * FROM empregados WHERE id = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        $sql = "SELECT * FROM tbalunos WHERE id = ?";
+        if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
             
@@ -114,7 +114,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         mysqli_stmt_close($stmt);
         
         // Fecha conexão
-        mysqli_close($link);
+        mysqli_close($conn);
     }  else{
         // URL não contém o parâmetro ID.
         header("location: error.php");
