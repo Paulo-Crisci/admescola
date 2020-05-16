@@ -1,45 +1,45 @@
 <?php
 // Verifique a existência do parâmetro id antes de processar mais
-if(isset($_POST["nome"]) && !empty(trim($_POST["nome"]))){
+if(isset($_POST["id"]) && !empty(trim($_POST["id"]))){
     // Incluir arquivo de configuração
     require_once "conexao.php";
-    
+
     // Prepare uma declaração de seleção
-    $sql = "SELECT * FROM tbaluno WHERE nome = ?";
-    
+    $sql = "SELECT * FROM tbnotas WHERE id = ?";
+
     if($stmt = mysqli_prepare($conn, $sql)){
         // Vincular variáveis ​​à instrução preparada como parâmetros
         mysqli_stmt_bind_param($stmt, "i", $param_id);
-        
+
         // Definir parâmetros
-        $param_id = trim($_GET["nome"]);
-        
+        $param_id = trim($_GET["id"]);
+
         // Tentativa de executar a declaração preparada
         if(mysqli_stmt_execute($stmt)){
             $result = mysqli_stmt_get_result($stmt);
-    
+
             if(mysqli_num_rows($result) == 1){
                 /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
-                contém apenas uma linha, não precisamos usar o loop while */
+                contém apenas uma linha, não precisamos usar o loop while */
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                
+
                 // Recuperar valor do campo individual
                 $nome = $row["nome"];
-                
+
             } else{
                 // O URL não contém um parâmetro de identificação válido. Redirecionar para a página de erro
                 header("location: error.php");
                 exit();
             }
-            
+
         } else{
             echo "Opa! Algo deu errado. Por favor, tente novamente mais tarde.";
         }
     }
-     
+
     // Fecha declaração
     mysqli_stmt_close($stmt);
-    
+
     // Fecha conexão
     mysqli_close($conn);
 } else{
@@ -48,6 +48,7 @@ if(isset($_POST["nome"]) && !empty(trim($_POST["nome"]))){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -62,7 +63,7 @@ if(isset($_POST["nome"]) && !empty(trim($_POST["nome"]))){
     </style>
 </head>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -75,11 +76,11 @@ if(isset($_POST["nome"]) && !empty(trim($_POST["nome"]))){
                     </div>
                     <div class="form-group">
                         <label>endereco</label>
-                        <p class="form-control-static"><?php echo $row["endereco"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["disciplina"]; ?></p>
                     </div>
                     <div class="form-group">
                         <label>salario</label>
-                        <p class="form-control-static"><?php echo $row["salario"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["av1"]; ?></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Voltar</a></p>
                 </div>

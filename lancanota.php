@@ -1,7 +1,6 @@
-<?php
+ <?php
 
 include_once 'conexao.php';
-
 
  ?>
 
@@ -38,7 +37,7 @@ include_once 'conexao.php';
                             <option value="">Escolha o Aluno</option>
                             <?php
                             
-                            $sql = "SELECT * FROM tbaluno WHERE 1";
+                            $sql = "SELECT * FROM tbalunos WHERE 1";
     
                             if($stmt = mysqli_prepare($conn, $sql)){                               
                                 // Tentativa de executar a declaração preparada
@@ -50,7 +49,7 @@ include_once 'conexao.php';
                                         /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
                                         contém apenas uma linha, não precisamos usar o loop while */
                                         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo "<option value='{$row['ID']}'>{$row['nome']}</option>";
+                                            echo "<option value='{$row['nome']}'>{$row['nome']}</option>";
                                         }
                                         
                                     } else{
@@ -87,7 +86,7 @@ include_once 'conexao.php';
                                         /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
                                         contém apenas uma linha, não precisamos usar o loop while */
                                         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo "<option value='{$row['ID']}'>{$row['disciplina']}</option>";
+                                            echo "<option value='{$row['disciplina']}'>{$row['disciplina']}</option>";
                                         }
                                         
                                     } else{
@@ -116,7 +115,7 @@ include_once 'conexao.php';
                         <div class="form-group">
                             <label>Avaliação 2</label>
                            
-                            <input type="av2" name="av2" class="form-control" ></input>  
+                            <input type="text" name="av2" class="form-control" ></input>  
                         </div>
                         
                     

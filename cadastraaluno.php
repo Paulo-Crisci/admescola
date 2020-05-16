@@ -78,7 +78,7 @@ require_once "conexao.php";
                         <div class="form-group">
                             <label>Digite o CEP</label>
                            
-                            <input name="cep" class="form-control" size="20" ><?php echo $cep; ?></input>  
+                            <input type="text" name="cep" class="form-control" value="<?php echo $cep; ?>">
                         </div>
                         <button type="submit">Verificar CEP</button>
                     
@@ -137,7 +137,7 @@ require_once "conexao.php";
                                         /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
                                         contém apenas uma linha, não precisamos usar o loop while */
                                         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo "<option value='{$row['ID']}'>{$row['disciplina']}</option>";
+                                            echo "<option value='{$row['disciplina']}'>{$row['disciplina']}</option>";
                                         }
                                         
                                     } else{
@@ -156,43 +156,7 @@ require_once "conexao.php";
                             </select>
                             
                         </div>
-                        <div class="form-groupp ">
-                            <label><p>Escolha a Disciplina</p></label>
-                            <select name="disciplina"> <br><br>
-                            <option value="">Escolha a Disciplina</option>
-                            <?php
-                            
-                            $sql = "SELECT * FROM tbaluno WHERE 1";
-    
-                            if($stmt = mysqli_prepare($conn, $sql)){                               
-                                // Tentativa de executar a declaração preparada
-                                if(mysqli_stmt_execute($stmt)){
-                                    $result = mysqli_stmt_get_result($stmt);
-                            
-                                    if(mysqli_num_rows($result) > 0){
-                                        //var_dump("into");
-                                        /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
-                                        contém apenas uma linha, não precisamos usar o loop while */
-                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo "<option value='{$row['ID']}'>{$row['nome']}</option>";
-                                        }
-                                        
-                                    } else{
-                                        // O URL não contém um parâmetro de identificação válido. Redirecionar para a página de erro
-                                        header("location: error.php");
-                                        exit();
-                                    }
-                                    
-                                } else{
-                                    echo "Opa! Algo deu errado. Por favor, tente novamente mais tarde.";
-                                }
-                            }
-                             
-                            ?>
-                            
-                            </select>
-                            
-                        </div>
+                        
                         <input type="submit" name="submit" class="btn btn-primary" value="Enviar">
                         
                         <a href="index.php" class="btn btn-default">Voltar</a>
