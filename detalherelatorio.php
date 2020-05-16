@@ -1,6 +1,6 @@
 <?php
 // Verifique a existência do parâmetro id antes de processar mais
-if(isset($_POST["id"]) && !empty(trim($_POST["id"]))){
+if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Incluir arquivo de configuração
     require_once "conexao.php";
 
@@ -18,7 +18,7 @@ if(isset($_POST["id"]) && !empty(trim($_POST["id"]))){
         if(mysqli_stmt_execute($stmt)){
             $result = mysqli_stmt_get_result($stmt);
 
-            if(mysqli_num_rows($result) == 1){
+            if(mysqli_num_rows($result)  == 1){
                 /* Busque a linha de resultados como uma matriz associativa. Desde o conjunto de resultados
                 contém apenas uma linha, não precisamos usar o loop while */
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);

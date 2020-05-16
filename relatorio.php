@@ -69,7 +69,7 @@
                                         echo "<td>" . $row['media'] . "</td>";
                                         echo "<td>" . $row['conceito'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='read.php?id=". $row['id'] ."' title='Visualizar Dados' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                                            echo "<a href='detalherelatorio.php?id=". $row['id'] ."' title='Visualizar Dados' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                                            
                                         echo "</td>";
                                     echo "</tr>";

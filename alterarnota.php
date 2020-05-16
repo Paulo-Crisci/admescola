@@ -2,19 +2,28 @@
 // Inclui o arquivo config.php
 require_once "conexao.php";
 
- 
-// Definir variáveis ​​e inicializar com valores vazios
+if (isset($_POST['enviar'])):
+    $AV1 = $_POST['av1'];
+    $AV2 = $_POST['av2'];
+    $AV3 = $_POST['av3'];
+    $CONCEITO = '';
 
-$NOME = $_POST['nome'];
-$DISCIPLINA = $_POST['disciplina'];
-$AV1 = $_POST['av1'];
-$AV2 = $_POST['av2'];
-$AV3 = $_POST['av3'];
-$MEDIA = 0;
-$CONCEITO = 0;
+    $MEDIA = ($AV1 + $AV2 + $AV3 ) / 3;
 
-
-$sql = "UPDATE tbnotas (nome, disciplina, av1, av2, av3, media, conceito) VALUES ('$NOME', '$DISCIPLINA', '$AV1', '$AV2', '$AV3', '$MEDIA', '$CONCEITO')";
+    
+    if ($MEDIA >= 8.5):
+        $CONCEITO = "A";
+    elseif (($MEDIA < 8.4) && ($MEDIA >= 7)):
+        $CONCEITO = "B";
+    elseif (($MEDIA < 6.9) && ($MEDIA >= 6)):
+        $CONCEITO = "C";
+    elseif (($MEDIA < 5.9) && ($MEDIA >= 4)):
+        $CONCEITO = "D";
+    else: 
+        $CONCEITO ="F";
+                
+    endif;
+    $sql = "INSERT INTO tbnotas (av1, av2, av3, media, conceito) VALUES ('$AV1', '$AV2', '$AV3', '$MEDIA', '$CONCEITO')";
 
 if (mysqli_query($conn, $sql)){
 echo "disciplina cadastrada com sucesso";
@@ -24,7 +33,12 @@ echo "disciplina cadastrada com sucesso";
  mysqli_close($conn);
 
 
+endif;
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -95,7 +109,7 @@ echo "disciplina cadastrada com sucesso";
                             <option value="">Escolha a Disciplina</option>
                             <?php
                             
-                            $sql = "SELECT * FROM tbnotas WHERE 1";
+                            $sql = "SELECT * FROM tbmateria WHERE 1";
     
                             if($stmt = mysqli_prepare($conn, $sql)){                               
                                 // Tentativa de executar a declaração preparada
@@ -130,21 +144,21 @@ echo "disciplina cadastrada com sucesso";
                         <br><br>
                         <div class="form-group">
                             <label>Atividade 1</label>
-                            <input type="text" name="av1" class="form-control"value="<?php echo $av1 ?>">
+                            <input type="text" name="av1" class="form-control"value="<?php echo $AV1 ?>">
                             
                         </div>
                         <div class="form-group">
                             <label>Atividade 2</label>
-                            <input type="text" name="av2" class="form-control"value="<?php echo $av2 ?>">
+                            <input type="text" name="av2" class="form-control"value="<?php echo $AV2 ?>">
                             
                         </div>
                         <div class="form-group">
                             <label>Atividade 3</label>
-                            <input type="text" name="av3" class="form-control"value="<?php echo $av3 ?>">
+                            <input type="text" name="av3" class="form-control"value="<?php echo $AV3 ?>">
                             
                         </div>
                         
-                        <input type="submit" class="btn btn-primary" value="Alterar nota">
+                        <input type="submit" name="enviar" class="btn btn-primary" value="Alterar nota">
                         <a href="index.php" class="btn btn-default">Voltar</a>
                     </form>
                 </div>
