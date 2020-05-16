@@ -2,7 +2,7 @@
 // Inclui o arquivo config.php
 require_once "conexao.php";
 
-@$nome=$_GET['nome']; // Use this line or below line if register_global is off
+isset($_GET['nome'])? $nome=$_GET['nome'] : $nome=""; // Use this line or below line if register_global is off
 
 if (isset($_POST['enviar'])):
     $NOME = $_POST['nome'];
@@ -104,7 +104,7 @@ else{echo "document.addEventListener('DOMContentLoaded', function(event) {docume
 $query1="SELECT DISTINCT nome,id FROM tbnotas order by nome"; 
 if($stmt = $conn->query("$query1")){
 	while ($row2 = $stmt->fetch_assoc()) {
-	if($row2['nome']==@$nome){
+	if($row2['nome']==$nome){
         echo "<option selected value='$row2[nome]'>$row2[nome]</option>";
     } else{
     echo  "<option value='$row2[nome]'>$row2[nome]</option>";}
