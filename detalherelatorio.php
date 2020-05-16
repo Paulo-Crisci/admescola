@@ -71,16 +71,32 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <h1>Visualizar Dados</h1>
                     </div>
                     <div class="form-group">
-                        <label>nome</label>
+                        <label>Nome do aluno</label>
                         <p class="form-control-static"><?php echo $row["nome"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>endereco</label>
+                        <label>Nome da Disciplina</label>
                         <p class="form-control-static"><?php echo $row["disciplina"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>salario</label>
+                        <label>Nota Avaliação 1</label>
                         <p class="form-control-static"><?php echo $row["av1"]; ?></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Nota Avaliação 2</label>
+                        <p class="form-control-static"><?php echo $row["av2"]; ?></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Nota Avaliação 3</label>
+                        <p class="form-control-static"><?php echo $row["av3"]; ?></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Média das Provas</label>
+                        <p class="form-control-static"><?php echo $row["media"]; ?></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Situação</label>
+                        <p class="form-control-static"><?php echo $row["conceito"]; ?></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Voltar</a></p>
                 </div>

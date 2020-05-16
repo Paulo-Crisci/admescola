@@ -5,6 +5,7 @@ require_once "conexao.php";
 // Definir variáveis ​​e inicializar com valores vazios
 $N_MATERIA = $_POST['materia'];
 
+
 $sql = "INSERT INTO tbmateria (DISCIPLINA)  VALUES ('$N_MATERIA')";
 
 if (mysqli_query($conn, $sql)){
